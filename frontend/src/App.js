@@ -168,6 +168,66 @@ function App() {
   const [showCompose, setShowCompose] = useState(false);
   const [composeText, setComposeText] = useState('');
   const [currentUser] = useState(mockUsers[3]); // John Smith as current user
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  // Check if mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Auto-generate random tweets
+  useEffect(() => {
+    const generateRandomTweet = () => {
+      const randomUser = mockUsers[Math.floor(Math.random() * mockUsers.length)];
+      const randomTweets = [
+        "Just had the most amazing coffee this morning! ☕ Starting the day right! #MondayMotivation",
+        "Working on some exciting new projects. Can't wait to share what I've been building! 🚀",
+        "Beautiful day outside! Perfect weather for a walk in the park 🌞",
+        "Learning something new every day. Knowledge is power! 📚 #NeverStopLearning",
+        "Grateful for all the amazing people in my life. Feeling blessed today! 🙏",
+        "Just finished a great workout! Feeling energized and ready to tackle the day 💪",
+        "Trying out a new recipe today. Cooking is my new hobby! 👨‍🍳 #FoodLover",
+        "Reading an incredible book about productivity. So many great insights! 📖",
+        "Weekend vibes are hitting different today. Time to relax and recharge! 🌅",
+        "Technology is advancing so fast. Exciting times to be alive! 🤖 #TechLife",
+        "Music has the power to change everything. What's your favorite song right now? 🎵",
+        "Small steps every day lead to big changes. Keep pushing forward! 💫"
+      ];
+      
+      const randomContent = randomTweets[Math.floor(Math.random() * randomTweets.length)];
+      const randomImages = [
+        'https://images.pexels.com/photos/5081402/pexels-photo-5081402.jpeg',
+        'https://images.unsplash.com/photo-1562646329-0d0f4d3bf503',
+        'https://images.unsplash.com/photo-1698331383094-603aa3df9a14',
+        null, null, null // More likely to have no image
+      ];
+      
+      const newTweet = {
+        id: Date.now(),
+        user: randomUser,
+        content: randomContent,
+        timestamp: new Date(),
+        likes: Math.floor(Math.random() * 1000),
+        retweets: Math.floor(Math.random() * 200),
+        replies: Math.floor(Math.random() * 50),
+        image: randomImages[Math.floor(Math.random() * randomImages.length)],
+        liked: false,
+        retweeted: false
+      };
+      
+      setPosts(prevPosts => [newTweet, ...prevPosts.slice(0, 19)]); // Keep only 20 posts
+    };
+
+    const interval = setInterval(generateRandomTweet, 15000); // New tweet every 15 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   const handleLike = (postId) => {
     setPosts(posts.map(post => 
