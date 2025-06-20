@@ -333,13 +333,13 @@ function App() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="border-b border-gray-200 dark:border-gray-800 p-4 hover:bg-gray-50 dark:hover:bg-gray-950 transition-colors cursor-pointer"
+      className="border-b border-gray-200 dark:border-gray-800 p-4 hover:bg-gray-50 dark:hover:bg-gray-950 transition-colors"
     >
       <div className="flex space-x-3">
         <img src={post.user.avatar} alt={post.user.displayName} className="w-12 h-12 rounded-full" />
         <div className="flex-1">
           <div className="flex items-center space-x-2 mb-1">
-            <span className="font-bold hover:underline">{post.user.displayName}</span>
+            <span className="font-bold hover:underline cursor-pointer">{post.user.displayName}</span>
             {post.user.verified && <Verified className="w-4 h-4 text-blue-500" />}
             <span className="text-gray-500">@{post.user.username}</span>
             <span className="text-gray-500">·</span>
@@ -361,7 +361,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Reply clicked');
+                console.log('Reply clicked for post:', post.id);
               }}
             >
               <div className="p-2 rounded-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900">
@@ -376,6 +376,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Retweet clicked for post:', post.id);
                 handleRetweet(post.id);
               }}
               className={`flex items-center space-x-2 transition-colors group ${
@@ -394,6 +395,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Like clicked for post:', post.id);
                 handleLike(post.id);
               }}
               className={`flex items-center space-x-2 transition-colors group ${
@@ -413,7 +415,7 @@ function App() {
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Share clicked');
+                console.log('Share clicked for post:', post.id);
               }}
             >
               <div className="p-2 rounded-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900">
