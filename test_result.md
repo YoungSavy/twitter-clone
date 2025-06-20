@@ -271,9 +271,7 @@ test_plan:
   current_focus:
     - "Post Interactions"
     - "Dark/Light Mode Toggle"
-  stuck_tasks:
-    - "Post Interactions"
-    - "Dark/Light Mode Toggle"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
