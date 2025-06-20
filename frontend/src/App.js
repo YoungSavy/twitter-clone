@@ -266,7 +266,14 @@ function App() {
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">What's happening</h2>
-          <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900">
+          <button 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setDarkMode(!darkMode);
+            }} 
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors"
+          >
             {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
