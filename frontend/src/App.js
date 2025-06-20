@@ -331,7 +331,7 @@ function App() {
   );
 
   const RightSidebar = () => (
-    <div className="fixed right-0 top-0 h-full w-80 p-4">
+    <div className={`${isMobile ? 'hidden' : 'fixed right-0 top-0 h-full w-80'} p-4`}>
       <div className="space-y-4">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold">What's happening</h2>
