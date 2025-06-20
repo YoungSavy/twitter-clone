@@ -543,9 +543,9 @@ function App() {
                   value={composeText}
                   onChange={(e) => setComposeText(e.target.value)}
                   placeholder="What's happening?"
-                  className="w-full resize-none border-none outline-none text-xl placeholder-gray-500 bg-transparent"
-                  rows="4"
+                  className="w-full resize-none border-none outline-none text-xl placeholder-gray-500 bg-transparent min-h-[120px]"
                   autoFocus
+                  style={{ fontSize: '18px', lineHeight: '1.5' }}
                 />
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center space-x-4">
