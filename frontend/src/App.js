@@ -351,6 +351,11 @@ function App() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="flex items-center space-x-2 text-gray-500 hover:text-blue-500 transition-colors group"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Reply clicked');
+              }}
             >
               <div className="p-2 rounded-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900">
                 <MessageCircle className="w-5 h-5" />
@@ -361,7 +366,11 @@ function App() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => handleRetweet(post.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleRetweet(post.id);
+              }}
               className={`flex items-center space-x-2 transition-colors group ${
                 post.retweeted ? 'text-green-500' : 'text-gray-500 hover:text-green-500'
               }`}
@@ -375,7 +384,11 @@ function App() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => handleLike(post.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleLike(post.id);
+              }}
               className={`flex items-center space-x-2 transition-colors group ${
                 post.liked ? 'text-red-500' : 'text-gray-500 hover:text-red-500'
               }`}
@@ -390,6 +403,11 @@ function App() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className="flex items-center space-x-2 text-gray-500 hover:text-blue-500 transition-colors group"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Share clicked');
+              }}
             >
               <div className="p-2 rounded-full group-hover:bg-blue-100 dark:group-hover:bg-blue-900">
                 <Share className="w-5 h-5" />
