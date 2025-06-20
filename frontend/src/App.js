@@ -573,12 +573,59 @@ function App() {
   );
 
   const Timeline = () => (
-    <div className="ml-64 mr-80 min-h-screen border-x border-gray-200 dark:border-gray-800">
-      <div className="sticky top-0 bg-white/80 dark:bg-black/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 z-10">
-        <div className="p-4">
+    <div className={`${isMobile ? 'w-full' : 'ml-64 mr-80'} min-h-screen border-x border-gray-200 dark:border-gray-800`}>
+      {/* Mobile header */}
+      {isMobile && (
+        <div className="sticky top-0 bg-white/80 dark:bg-black/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 z-10 p-4 flex items-center justify-between">
+          <button
+            onClick={() => setShowMobileMenu(true)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900"
+          >
+            <User className="w-6 h-6" />
+          </button>
           <h1 className="text-xl font-bold">Home</h1>
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900"
+          >
+            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
         </div>
-        <div className="flex">
+      )}
+      
+      {/* Desktop header */}
+      {!isMobile && (
+        <div className="sticky top-0 bg-white/80 dark:bg-black/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 z-10">
+          <div className="p-4">
+            <h1 className="text-xl font-bold">Home</h1>
+          </div>
+          <div className="flex">
+            {['For you', 'Following'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setSelectedTab(tab)}
+                className={`flex-1 py-4 px-4 font-semibold transition-colors relative ${
+                  selectedTab === tab
+                    ? 'text-black dark:text-white'
+                    : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'
+                }`}
+              >
+                {tab}
+                {selectedTab === tab && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 rounded-full"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Mobile tabs */}
+      {isMobile && (
+        <div className="flex border-b border-gray-200 dark:border-gray-800">
           {['For you', 'Following'].map((tab) => (
             <button
               key={tab}
@@ -592,14 +639,14 @@ function App() {
               {tab}
               {selectedTab === tab && (
                 <motion.div
-                  layoutId="activeTab"
+                  layoutId="activeTabMobile"
                   className="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 rounded-full"
                 />
               )}
             </button>
           ))}
         </div>
-      </div>
+      )}
 
       <div className="border-b border-gray-200 dark:border-gray-800 p-4">
         <div className="flex space-x-4">
@@ -638,6 +685,18 @@ function App() {
           <Post key={post.id} post={post} />
         ))}
       </div>
+
+      {/* Mobile floating post button */}
+      {isMobile && (
+        <motion.button
+          onClick={() => setShowCompose(true)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="fixed bottom-6 right-6 w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center z-40"
+        >
+          <Plus className="w-6 h-6" />
+        </motion.button>
+      )}
     </div>
   );
 
