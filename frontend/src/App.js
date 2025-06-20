@@ -707,6 +707,14 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
+                {/* Mobile menu backdrop */}
+                {isMobile && showMobileMenu && (
+                  <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                    onClick={() => setShowMobileMenu(false)}
+                  />
+                )}
+                
                 <Sidebar />
                 <Timeline />
                 <RightSidebar />
