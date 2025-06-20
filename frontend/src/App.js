@@ -511,7 +511,7 @@ function App() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white dark:bg-black rounded-2xl w-full max-w-2xl mx-4 p-6"
+            className={`bg-white dark:bg-black rounded-2xl w-full ${isMobile ? 'max-w-full mx-2 mt-16' : 'max-w-2xl mx-4'} p-6`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
