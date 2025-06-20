@@ -94,11 +94,92 @@ textarea:focus-visible {
   .mobile-hidden {
     display: none;
   }
+  
+  /* Ensure proper mobile layout */
+  .mobile-full-width {
+    width: 100vw;
+    max-width: 100%;
+  }
+  
+  /* Mobile specific padding and margins */
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  /* Mobile text sizing */
+  .mobile-text {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Mobile compose textarea */
+  .mobile-compose-textarea {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+    min-height: 120px !important;
+  }
 }
 
 @media (max-width: 1024px) {
   .tablet-hidden {
     display: none;
+  }
+}
+
+/* Fix for text input issues */
+textarea, input[type="text"] {
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+/* Prevent zoom on iOS */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select, textarea, input[type="text"] {
+    font-size: 16px;
+  }
+}
+
+/* Mobile layout fixes */
+@media (max-width: 767px) {
+  /* Full width timeline on mobile */
+  .timeline-mobile {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Hide desktop sidebars on mobile */
+  .desktop-sidebar {
+    display: none !important;
+  }
+  
+  /* Mobile post composition */
+  .mobile-compose {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+  }
+  
+  .mobile-compose-content {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+  
+  /* Dark mode for mobile compose */
+  .dark .mobile-compose-content {
+    background: black;
   }
 }
 
