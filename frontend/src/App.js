@@ -266,7 +266,16 @@ function App() {
   };
 
   const Sidebar = () => (
-    <div className="fixed left-0 top-0 h-full w-64 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4">
+    <div className={`${isMobile ? 'fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out' : 'fixed left-0 top-0 h-full w-64'} ${isMobile && !showMobileMenu ? '-translate-x-full' : 'translate-x-0'} border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-black p-4`}>
+      {isMobile && (
+        <button
+          onClick={() => setShowMobileMenu(false)}
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      )}
+      
       <div className="mb-8">
         <div className="w-8 h-8 bg-black dark:bg-white rounded-full flex items-center justify-center">
           <X className="w-5 h-5 text-white dark:text-black" />
@@ -293,8 +302,8 @@ function App() {
                 : 'hover:bg-gray-100 dark:hover:bg-gray-900'
             }`}
           >
-            <item.icon className="w-6 h-6" />
-            <span className="text-xl">{item.label}</span>
+            <item.icon className={`w-6 h-6 ${isMobile ? 'w-5 h-5' : ''}`} />
+            <span className={`${isMobile ? 'text-lg' : 'text-xl'}`}>{item.label}</span>
           </motion.div>
         ))}
       </nav>
@@ -305,15 +314,15 @@ function App() {
         whileTap={{ scale: 0.95 }}
         className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full mt-8 transition-colors"
       >
-        Post
+        {isMobile ? 'Post' : 'Post'}
       </motion.button>
 
       <div className="absolute bottom-4 left-4 right-4">
         <div className="flex items-center space-x-3 p-3 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer">
           <img src={currentUser.avatar} alt={currentUser.displayName} className="w-10 h-10 rounded-full" />
           <div className="flex-1">
-            <div className="font-bold">{currentUser.displayName}</div>
-            <div className="text-gray-500">@{currentUser.username}</div>
+            <div className="font-bold text-sm">{currentUser.displayName}</div>
+            <div className="text-gray-500 text-xs">@{currentUser.username}</div>
           </div>
           <MoreHorizontal className="w-5 h-5" />
         </div>
